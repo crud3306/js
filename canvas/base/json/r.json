@@ -1,0 +1,12 @@
+{
+	"images":[
+		{
+			"name":"girl", 
+			"url":"http://localhost:3000/canvas/base/images/girl.png"
+		},
+		{
+			"name":"qishi", 
+			"url":"http://localhost:3000/canvas/base/images/qishi.png"
+		}
+	]
+}

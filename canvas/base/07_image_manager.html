@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运动</title>
+	<style>
+		canvas { border:1px solid gray; }
+	</style>
+</head>
+<body>
+	<!-- 注意： 宽度与高度一定要写在这里，而不能通过css指定，因css指定的相当于把一个小画布放大了，里面的东西会虚 -->
+	<canvas width="1000" height="600" id="myCanvas"></canvas>
+
+	<!-- 我们必须使用javascript 来控制canvas演染各种东西 -->
+	<script type="text/javascript">
+		var	staticUrl = "http://localhost:3000"; 
+
+		// 使用dom方法得到画布
+		var myCanvas = document.getElementById("myCanvas");
+		// 使用画布的上下文
+		var ctx = myCanvas.getContext("2d");
+
+		/*
+		// canvas使用图片，使用drawImage函数，需要注意的是：必须等img完全加载之后，才能呈递图片。
+		// context.drawImage(img, sx, sy, sw, sh, disx, disy, disw, dish);
+			img	规定要使用的图像、画布或视频。
+			
+			sx	可选。开始剪切的 x 坐标位置。
+			sy	可选。开始剪切的 y 坐标位置。
+			sw	可选。被剪切图像的宽度。
+			sh	可选。被剪切图像的高度。
+
+			disx	在画布上放置图像的 x 坐标位置。 (必传)
+			disy	在画布上放置图像的 y 坐标位置。 (必传)
+			disw	可选。要使用的图像的宽度。（伸展或缩小图像）
+			dish	可选。要使用的图像的高度。（伸展或缩小图像）
+		*/
+
+		// 资源对象
+		var R = {};
+		var alreadyLoadNum = 0;
+
+		// 使用ajax读取资源文件 json/r.json
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+
+				console.log(xhr.responseText);
+
+				// json字串转为json对象
+				var R_Obj = JSON.parse(xhr.responseText);
+				console.log(R_Obj);
+
+				for (var i = 0; i < R_Obj.images.length; i++) {
+
+					R[R_Obj.images[i].name] = new Image();
+					R[R_Obj.images[i].name].src = R_Obj.images[i].url;
+
+					R[R_Obj.images[i].name].onload = function(){
+						// 计数器加1
+						alreadyLoadNum++;
+
+						// 清屏
+						ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+						ctx.font = "16px 宋体";
+
+						// 显示正在加载第几张图片
+						console.log(alreadyLoadNum);
+						ctx.fillText("正在加载第"+alreadyLoadNum+"/"+R_Obj.images.length+"张图片，请稍后", 100, 100);
+
+						// 计数器如果和图片数一样了，全部加载完毕
+						if (alreadyLoadNum == R_Obj.images.length) {
+							console.log("全部都加载完毕了!!!");
+
+							// sleep(1000);
+							start();
+						}
+					}
+
+				}
+			}
+		}
+		// xhr.open("get", "json/r.json", true);
+		xhr.open("get", staticUrl+"/canvas/base/json/r.json", true);
+		xhr.send(null);
+
+		// 开始游戏
+		function start() {
+			// 帧计数
+			var fno = 0;
+
+			setInterval(function(){
+				fno++;
+
+				// 清屏
+				ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+				ctx.font = "16px 宋体";
+				ctx.fillText(fno, 10, 20);
+
+				ctx.drawImage(R.girl, 0, 0, 79, 108, 100, 100, 79, 108);
+				ctx.drawImage(R.qishi, 0, 0, 82.25, 82.25, 200, 120, 82.25, 82.25);
+			}, 40);
+		}
+
+		// 暂停几毫秒
+		function sleep(d){
+		  for(var t = Date.now();Date.now() - t <= d;);
+		}
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

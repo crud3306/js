@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运动</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			background-color: black;
+		}
+		canvas { 
+			/*border:1px solid gray; */
+		}
+	</style>
+</head>
+<body>
+	<!-- 注意： 宽度与高度一定要写在这里，而不能通过css指定，因css指定的相当于把一个小画布放大了，里面的东西会虚 -->
+	<canvas  id="myCanvas"></canvas>
+
+	<!-- 我们必须使用javascript 来控制canvas演染各种东西 -->
+	<script type="text/javascript">
+		// 使用dom方法得到画布
+		var myCanvas = document.getElementById("myCanvas");
+		// 使用画布的上下文
+		var ctx = myCanvas.getContext("2d");
+
+		myCanvas.width = document.documentElement.clientWidth;
+		myCanvas.height = document.documentElement.clientHeight;
+
+
+		function Ball(x, y) {
+			this.x = x;	// 圆心坐标x
+			this.y = y; // 圆心坐标y
+			this.r = 30; // 圆半径
+			// this.color = "orange"; // 圆填充色
+			this.color = "rgb("+parseInt(Math.random()*256) +","+parseInt(Math.random()*256) +","+parseInt(Math.random()*256) + ", 0.8" +")";
+			this.dx = parseInt(Math.random() * 8) - 4;	// x的变化值
+			this.dy = parseInt(Math.random() * 8) - 4;	// y的变化值
+
+			ballsArr.push(this);
+		}
+
+		Ball.prototype.update = function() {
+			this.x += this.dx
+			this.y += this.dy
+
+			this.r--;
+			// 如果半径<=0了，需要从数组中删除掉
+			if (this.r <= 0) {
+				this.godie();
+			}
+		}
+
+		// 自杀
+		Ball.prototype.godie = function() {
+			for (var i = 0; i < ballsArr.length; i++) {
+				if (ballsArr[i] === this) {
+					ballsArr.splice(i, 1);
+				}
+			}
+		}
+
+		Ball.prototype.render = function() {
+			ctx.beginPath();
+			ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, true);
+			ctx.closePath();
+			ctx.fillStyle = this.color;
+			ctx.fill();
+		}
+
+		// 小球数组
+		var ballsArr = [];
+
+		myCanvas.onmousemove = function(e) {
+			new Ball(e.clientX, e.clientY);
+		}
+
+		// new Ball(100, 100);
+
+
+		setInterval(function(){
+			// 清屏 
+			ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+			for (var i = 0; i < ballsArr.length; i++) {
+				ballsArr[i].update();
+				// 因为update可能会删除这个小球，所以需验证一下小球是否存在
+				ballsArr[i] &&  ballsArr[i].render();
+			}
+		}, 20);
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

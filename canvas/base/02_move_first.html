@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运动</title>
+	<style>
+		canvas { border:1px solid gray; }
+	</style>
+</head>
+<body>
+	<!-- 注意： 宽度与高度一定要写在这里，而不能通过css指定，因css指定的相当于把一个小画布放大了，里面的东西会虚 -->
+	<canvas width="600" height="400" id="myCanvas"></canvas>
+
+	<!-- 我们必须使用javascript 来控制canvas演染各种东西 -->
+	<script type="text/javascript">
+		// 使用dom方法得到画布
+		var myCanvas = document.getElementById("myCanvas");
+		// 使用画布的上下文
+		var ctx = myCanvas.getContext("2d");
+
+		// 画布上的东西，不动控制；要想改变，只能重画
+		// canvas 的画图原理就是：清屏 -> 重绘 -> 清屏 -> 重绘 ...
+		var x = 100;
+		setInterval(function(){
+			x++;
+
+			// 清屏
+			ctx.clearRect(0, 0, 600, 400);
+
+			ctx.beginPath();
+			ctx.arc(x, 100, 30, 0, Math.PI * 2, true);
+			ctx.closePath();
+			ctx.fillStyle = "orange";
+			ctx.fill();	
+		}, 20);
+		
+
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

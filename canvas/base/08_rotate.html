@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运动</title>
+	<style>
+		canvas { border:1px solid gray; }
+	</style>
+</head>
+<body>
+	<!-- 注意： 宽度与高度一定要写在这里，而不能通过css指定，因css指定的相当于把一个小画布放大了，里面的东西会虚 -->
+	<canvas width="600" height="400" id="myCanvas"></canvas>
+
+	<!-- 我们必须使用javascript 来控制canvas演染各种东西 -->
+	<script type="text/javascript">
+		// 使用dom方法得到画布
+		var myCanvas = document.getElementById("myCanvas");
+		// 使用画布的上下文
+		var ctx = myCanvas.getContext("2d");
+
+		var d = 0;
+		setInterval(function(){
+			d += 0.1;
+
+			// 注意此与ctx.restore();是一对，都要出现
+			ctx.save();
+
+			ctx.clearRect(0, 0, 600, 400);
+
+			//注意：canvas的旋转是整个画布自已的旋转，是围绕画布的左上角（即x=0,y=0）旋转的，为了更好的物体旋转
+			// 我们让坐标系中心移到要旋转的物体的几何中心上，然后再旋转。
+			// 比如原物体(x=100, y=100, w=100, h=100)，则坐标系中心从(0,0)移到(0+w+x/2, 0+h+y/2)，物体(x,y)变为(-x/2, -y/2)
+			ctx.translate(150, 150);
+			ctx.rotate(d);	// 旋转
+			ctx.fillRect(-50, -50, 100, 100);
+
+			// 注意此与ctx.save();是一对，都要出现
+			ctx.restore();
+		}, 20);
+
+		
+
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运动</title>
+	<style>
+		canvas { border:1px solid gray; }
+	</style>
+</head>
+<body>
+	<!-- 注意： 宽度与高度一定要写在这里，而不能通过css指定，因css指定的相当于把一个小画布放大了，里面的东西会虚 -->
+	<canvas width="1000" height="600" id="myCanvas"></canvas>
+
+	<!-- 我们必须使用javascript 来控制canvas演染各种东西 -->
+	<script type="text/javascript">
+		// 使用dom方法得到画布
+		var myCanvas = document.getElementById("myCanvas");
+		// 使用画布的上下文
+		var ctx = myCanvas.getContext("2d");
+
+		/*
+		// canvas使用图片，使用drawImage函数，需要注意的是：必须等img完全加载之后，才能呈递图片。
+		// context.drawImage(img, sx, sy, sw, sh, disx, disy, disw, dish);
+			img	规定要使用的图像、画布或视频。
+			
+			sx	可选。开始剪切的 x 坐标位置。
+			sy	可选。开始剪切的 y 坐标位置。
+			sw	可选。被剪切图像的宽度。
+			sh	可选。被剪切图像的高度。
+
+			disx	在画布上放置图像的 x 坐标位置。 (必传)
+			disy	在画布上放置图像的 y 坐标位置。 (必传)
+			disw	可选。要使用的图像的宽度。（伸展或缩小图像）
+			dish	可选。要使用的图像的高度。（伸展或缩小图像）
+		*/
+
+		// 创建一个img对象的孤儿节点
+		var image = new Image();
+		image.src="./images/girl.png";
+
+		var step = 0;
+		var x = 100;
+		// 一定要等到这个图片loaded之后，然后渲染它
+		image.onload = function(){
+			setInterval(function(){
+				// 清屏
+				ctx.clearRect(0, 0, 1000, 600);
+
+				step++;
+				if (step > 7) {
+					step = 0;
+				}
+
+				x += 4;
+
+
+				ctx.drawImage(image, 79*step, 108*2, 79, 108, x, 100, 79, 108);
+			}, 300);
+			
+		}
+
+
+
+
+
+		// 画布上的东西，不动控制；要想改变，只能重画
+		// canvas 的画图原理就是：清屏 -> 重绘 -> 清屏 -> 重绘 ...
+		// var x = 100;
+		// setInterval(function(){
+			
+		// }, 20);
+		
+
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
