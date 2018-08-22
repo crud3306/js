@@ -3,3 +3,5 @@ jspm_packages
 dist
 .tmp
 bower_components
+.crx
+.pem

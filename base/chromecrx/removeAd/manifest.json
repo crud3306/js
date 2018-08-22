@@ -1,0 +1,18 @@
+{
+  "name": "qRad",
+  "manifest_version": 2,
+  "version": "1.0",
+  "description": "清广告",
+  "browser_action": {
+    "default_icon": "static/images/rad.png" // 在浏览右上角显示的图标
+  },
+  "content_scripts": [
+    {
+      // "matches": ["https://www.sohu.com/*"],
+      "matches": ["http://*/*","https://*/*"],
+      "js": ["static/js/script.js"]
+    }
+  ],
+  // icons指定插件在已安装列表显示的icon
+  "icons": {"16": "static/images/rad.png", "48": "static/images/rad.png", "128": "static/images/rad.png"}
+}
