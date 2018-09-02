@@ -13,3 +13,23 @@ function removeAd(){
 	}
 	// console.log(document.getElementsByTagName("iframe"), 'end');
 }
+
+var checkUrls = [
+	'aliyun.com',
+	'qq.com'
+];
+
+function checkUrl(url)
+{
+	if (!url) {
+		return false;
+	}
+
+	for (var i = 0; i < checkUrls.length; i++) {
+		if (url.indexOf(checkUrls[i]) != -1) {
+			return true;
+		}
+	}
+
+	return false;
+}

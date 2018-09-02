@@ -20,8 +20,8 @@
 
 // charAt()	返回在指定位置的字符。
 // charCodeAt()	返回在指定的位置的字符的 Unicode 编码。
-// indexOf()	检索字符串。
-// lastIndexOf()	从后向前搜索字符串。
+// indexOf()	检索字符串，没找到返回-1。
+// lastIndexOf()	从后向前搜索字符串，没找到返回-1。
 
 // italics()	使用斜体显示字符串。
 // link()	将字符串显示为链接。
@@ -62,6 +62,18 @@ console.log(str.substring(1, 2));
 
 console.log(str.toLocaleUpperCase());
 console.log(str.toUpperCase());
+
+
+
+
+// string.indexOf(searchvalue, start)
+// ------------------
+// 参数
+// searchvalue	必需。规定需检索的字符串值。
+// start	可选的整数参数。规定在字符串中开始检索的位置。它的合法取值是 0 到 string Object.length - 1。如省略该参数，则将从字符串的首字符开始检索。
+// 返回值
+// Number	查找指定字符串第一次出现的位置，如果没找到匹配的字符串则返回 -1。
+
 
 
 
